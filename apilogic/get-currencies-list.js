@@ -1,6 +1,7 @@
 // getCurrenciesList function definition
 // gets currencies list from fixer.io
 
+// 3rd party libraries
 const axios = require('axios'); // http request library
 
 // fixer API components- returns list of currencies

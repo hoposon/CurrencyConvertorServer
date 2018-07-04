@@ -1,7 +1,11 @@
 // convertAmount function definition
 // gets list of rates for conversion from fixer.io
 
+// 3rd party libraries
 const axios = require('axios'); // http request library
+
+// local modules
+const {updateStats} = require('./update-stats'); // updates statistics
 
 // fixer API components- returns list of rates
 const API_URL = 'http://data.fixer.io/api/latest'; // API URL
@@ -19,16 +23,34 @@ convertAmount = (req, res) => {
         if (response.status === 200) {
             // only response with success true returns data
             if (response.data.success === true) {
-                res.send({
-                    success: true,
-                    data: {
-                        timestamp: response.data.timestamp,
-                        base: response.data.base,
-                        date: response.data.date,
-                        rates: response.data.rates
-                    } 
-                    
-                })
+
+                // when there is result it is possible to make the conversion and update statistics
+                try {
+                    // update statisctics
+                    console.log(req);
+                    updateStats(234, 'EUR');
+
+                    // make conversion
+
+
+
+                    // send conversion result
+                    res.send({
+                        success: true,
+                        data: {
+                            timestamp: response.data.timestamp,
+                            base: response.data.base,
+                            date: response.data.date,
+                            rates: response.data.rates
+                        } 
+                        
+                    })
+                }
+                catch (e) {
+                    throw new Error(e.message);
+                }
+
+                
             }
         }
         // # log error
