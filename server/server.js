@@ -22,7 +22,6 @@ app.get('/getCurrencies', (req, res) => {
 
 
 
-
 // start server on given port
 app.listen(port,() => {
     console.log(`Started on port ${port}`);

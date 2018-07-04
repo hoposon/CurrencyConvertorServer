@@ -3,23 +3,42 @@ const axios = require('axios'); // http request library
 // fixer API components- returns list of currencies
 const API_URL = 'http://data.fixer.io/api/symbols'; // API URL
 const API_KEY = 'access_key=6dc55fc14ad2e142f61f9d1032c6eb45'; // api access key
+
 const apiUrl = `${API_URL}?${API_KEY}`;
+
 
 // callback function for /getCurrencies endpoint
 getCurrenciesList = (req, res) => {
     // call fixer API to get list of currencies
     axios.get(apiUrl).then((response) => {
-        console.log(response);
-        res.send({
-            status: response.status,
-            data: response.data
-        });
-    }).catch((e) => {
-        console.log(e);
-        res.status(400).send(e);
-    })
-}
 
+        // handle response from fixer
+        // only request status 200 is success
+        if (response.status === 200) {
+            // only response with success true returns data
+            if (response.data.success === true) {
+                res.send({
+                    success: true,
+                    data: response.data.symbols
+                })
+            }
+        }
+        // # log error
+        
+        // other responses are unssuccesful = do not return requested data
+        throw new Error('Can not get data');
+    }).catch((e) => {
+        // # log error
+        // # handle better custom errors like ENOTFOUND vs errors from the API
+
+        // process errors/unsuccessful requests
+        res.status(500).send({
+            success: false,
+            error: e.message
+        });
+    })
+
+}
 
 
 
