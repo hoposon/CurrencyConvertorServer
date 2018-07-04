@@ -1,5 +1,6 @@
 // convertAmount function definition
 // gets list of rates for conversion from fixer.io
+// and updates conversions operations statistics
 
 // 3rd party libraries
 const axios = require('axios'); // http request library

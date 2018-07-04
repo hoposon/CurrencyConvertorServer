@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // local modules
 const {getCurrenciesList} = require('../apilogic/get-currencies-list');
 const {convertAmount} = require('../apilogic/convert-amount');
+const {getStats} = require('../apilogic/get-stats');
 
 
 // create express app
@@ -30,6 +31,12 @@ app.get('/getCurrencies', (req, res) => {
 // this also updates the statistics
 app.get('/convert', (req, res) => {
     convertAmount(req, res);
+})
+// -------------
+
+// GET /stats API - gets conversion statistics
+app.get('/stats', (req, res) => {
+    getStats(req, res);
 })
 // -------------
 

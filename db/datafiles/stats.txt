@@ -1,1 +1,1 @@
-{"amount":1049.2901411020953,"currencies":{"EUR":3,"USD":17},"requests":20}
+{"amount":20.394774205215004,"currencies":{"USD":1},"requests":1}

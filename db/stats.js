@@ -25,6 +25,19 @@ class Stats {
         this.data.requests++;
         fs.writeFileSync(this.fileName, JSON.stringify(this.data));
     }
+
+    getMostUsedDestCurrency() {
+        let maxCurrUsageCount = 0;
+        let maxCurrCode;
+        for (let curr in this.data.currencies) {
+            if (maxCurrUsageCount < this.data.currencies[curr]) {
+                maxCurrUsageCount = this.data.currencies[curr];
+                maxCurrCode = curr;
+            }
+        }
+
+        return maxCurrCode;
+    }
 }
 
 

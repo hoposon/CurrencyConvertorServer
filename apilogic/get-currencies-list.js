@@ -13,6 +13,9 @@ const apiUrl = `${API_URL}?${API_KEY}`;
 
 // callback function for /getCurrencies endpoint
 getCurrenciesList = (req, res) => {
+    
+    // no parameters no input validation
+
     // call fixer API to get list of currencies
     axios.get(apiUrl).then((response) => {
 
