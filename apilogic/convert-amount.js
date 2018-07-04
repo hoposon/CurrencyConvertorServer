@@ -37,7 +37,7 @@ convertAmount = (req, res) => {
                 try {
 
                     // make conversion to requested currency
-                    convertedAmount = amount * response.data.rates[fromCurrency] * response.data.rates[toCurrency];
+                    convertedAmount = amount / response.data.rates[fromCurrency] * response.data.rates[toCurrency];
 
                     // convert to USD for statistics
                     amountUSD = amount * response.data.rates[fromCurrency] * response.data.rates["USD"];

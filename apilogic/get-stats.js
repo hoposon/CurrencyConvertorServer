@@ -22,7 +22,8 @@ getStats = (req, res) => {
             data: {
                 totalAmount: stats.data.amount,
                 conversionRequests: stats.data.requests,
-                maxUsedDestCurrency: maxUsedDestCurrency
+                maxUsedDestCurrency: maxUsedDestCurrency,
+                currenciesUsage: stats.data.currencies
             }
         })
     } else {
