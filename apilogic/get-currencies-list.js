@@ -24,7 +24,8 @@ getCurrenciesList = (req, res) => {
                 res.send({
                     success: true,
                     data: response.data.symbols
-                })
+                });
+                return;
             }
         }
         // # log error

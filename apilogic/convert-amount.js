@@ -24,37 +24,52 @@ convertAmount = (req, res) => {
             // only response with success true returns data
             if (response.data.success === true) {
 
+                // validate params 
+                // #validate it exists in returned rates
+                let amount = req.query.amount;
+                let fromCurrency = req.query.from;
+                let toCurrency = req.query.to;
+                let convertedAmount = 0;
+                let amountUSD = 0;
+
                 // when there is result it is possible to make the conversion and update statistics
                 try {
+
+                    // make conversion to requested currency
+                    convertedAmount = amount * response.data.rates[fromCurrency] * response.data.rates[toCurrency];
+
+                    // convert to USD for statistics
+                    amountUSD = amount * response.data.rates[fromCurrency] * response.data.rates["USD"];
+
                     // update statisctics
-                    console.log(req);
-                    updateStats(234, 'EUR');
-
-                    // make conversion
-
-
+                    updateStats(amountUSD, fromCurrency);
 
                     // send conversion result
-                    res.send({
+                    res.status(200).send({
                         success: true,
                         data: {
                             timestamp: response.data.timestamp,
-                            base: response.data.base,
                             date: response.data.date,
-                            rates: response.data.rates
+                            convertedData : {
+                                amount: convertedAmount,
+                                symbol: toCurrency
+                            },
+                            originalData : {
+                                amount: amount,
+                                symbol: fromCurrency
+                            }
                         } 
                         
-                    })
+                    });
+                    return;
                 }
                 catch (e) {
                     throw new Error(e.message);
                 }
-
-                
             }
         }
         // # log error
-
+        
         // other responses are unssuccesful = do not return requested data
         throw new Error('Can not get data');
     }).catch((e) => {
