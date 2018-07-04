@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 // local modules
 const {getCurrenciesList} = require('../apilogic/get-currencies-list');
+const {convertAmount} = require('../apilogic/convert-amount');
 
 
 // create express app
@@ -15,11 +16,23 @@ const port = process.env.PORT || 3000;
 // apply bodyParser to each request
 app.use(bodyParser.json());
 
-//GET /getCurrencies API
+// APIS section
+// ------------------------------------------------------------------------------------
+
+// GET /getCurrencies API - get list of currencies from fixer.io
 app.get('/getCurrencies', (req, res) => {
     getCurrenciesList(req, res);
 });
+// -------------
 
+// GET /convert API - convert requested amount from/to requested currency
+// this also updates the statistics
+app.get('/convert', (req, res) => {
+    convertAmount(req, res);
+})
+// -------------
+
+// ------------------------------------------------------------------------------------
 
 
 // start server on given port

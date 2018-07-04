@@ -1,20 +1,19 @@
-// getCurrenciesList function definition
-// gets currencies list from fixer.io
+// convertAmount function definition
+// gets list of rates for conversion from fixer.io
 
 const axios = require('axios'); // http request library
 
-// fixer API components- returns list of currencies
-const API_URL = 'http://data.fixer.io/api/symbols'; // API URL
+// fixer API components- returns list of rates
+const API_URL = 'http://data.fixer.io/api/latest'; // API URL
 const API_KEY = 'access_key=6dc55fc14ad2e142f61f9d1032c6eb45'; // api access key
 
 // complete URL
 const apiUrl = `${API_URL}?${API_KEY}`;
 
-// callback function for /getCurrencies endpoint
-getCurrenciesList = (req, res) => {
-    // call fixer API to get list of currencies
-    axios.get(apiUrl).then((response) => {
+// callback function for /convert endpoint
+convertAmount = (req, res) => {
 
+    axios.get(apiUrl).then((response) => {
         // handle response from fixer
         // only request status 200 is success
         if (response.status === 200) {
@@ -22,7 +21,13 @@ getCurrenciesList = (req, res) => {
             if (response.data.success === true) {
                 res.send({
                     success: true,
-                    data: response.data.symbols
+                    data: {
+                        timestamp: response.data.timestamp,
+                        base: response.data.base,
+                        date: response.data.date,
+                        rates: response.data.rates
+                    } 
+                    
                 })
             }
         }
@@ -40,9 +45,7 @@ getCurrenciesList = (req, res) => {
             error: e.message
         });
     })
-
 }
 
 
-
-module.exports = {getCurrenciesList}
+module.exports = {convertAmount}
