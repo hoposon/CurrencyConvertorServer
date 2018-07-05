@@ -46,7 +46,7 @@ convertAmount = (req, res) => {
                     updateStats(amountUSD, fromCurrency);
 
                     // send conversion result
-                    res.status(200).send({
+                    res.header('Access-Control-Allow-Origin', '*').send({
                         success: true,
                         data: {
                             timestamp: response.data.timestamp,

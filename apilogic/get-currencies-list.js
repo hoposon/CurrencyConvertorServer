@@ -24,7 +24,7 @@ getCurrenciesList = (req, res) => {
         if (response.status === 200) {
             // only response with success true returns data
             if (response.data.success === true) {
-                res.send({
+                res.header('Access-Control-Allow-Origin', '*').send({
                     success: true,
                     data: response.data.symbols
                 });

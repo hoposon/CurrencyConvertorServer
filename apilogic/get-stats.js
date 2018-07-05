@@ -17,7 +17,7 @@ getStats = (req, res) => {
     const stats = new Stats(fileName);
     const maxUsedDestCurrency = stats.getMostUsedDestCurrency();
     if(maxUsedDestCurrency) {
-        res.send({
+        res.header('Access-Control-Allow-Origin', '*').send({
             success: true,
             data: {
                 totalAmount: stats.data.amount,
