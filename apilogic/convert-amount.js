@@ -78,7 +78,7 @@ convertAmount = (req, res) => {
         // # handle better custom errors like ENOTFOUND vs errors from the API
 
         // process errors/unsuccessful requests
-        res.status(500).send({
+        res.header('Access-Control-Allow-Origin', '*').status(500).send({
             success: false,
             error: e.message
         });

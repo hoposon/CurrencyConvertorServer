@@ -27,7 +27,7 @@ getStats = (req, res) => {
             }
         })
     } else {
-        res.status(404).send({
+        res.header('Access-Control-Allow-Origin', '*').status(404).send({
             success: false,
             error: 'Data not available'
         })
