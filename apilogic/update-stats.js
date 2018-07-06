@@ -19,6 +19,7 @@ const fileName = path.join(__dirname,'../db/datafiles/stats.txt');
 updateStats = (amount, destCurrency) => {
     let stats = new Stats(fileName);
     stats.updateData(amount, destCurrency);
+    return stats.data;
 }
 
 
