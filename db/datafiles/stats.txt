@@ -1,1 +1,1 @@
-{"amount":5875481171.968992,"currencies":{"USD":4,"CZK":6,"EUR":2,"GBP":1,"IRR":2,"undefined":1,"AED":1,"ANG":3,"AUD":1,"ALL":1},"requests":22}
+{"amount":45.15122104614523,"currencies":{"CZK":1},"requests":1,"maxCurrCode":"CZK"}

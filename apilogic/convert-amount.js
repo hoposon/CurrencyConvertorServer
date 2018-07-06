@@ -40,7 +40,7 @@ convertAmount = (req, res) => {
                     convertedAmount = amount / response.data.rates[fromCurrency] * response.data.rates[toCurrency];
 
                     // convert to USD for statistics
-                    amountUSD = amount * response.data.rates[fromCurrency] * response.data.rates["USD"];
+                    amountUSD = amount / response.data.rates[fromCurrency] * response.data.rates["USD"];
 
                     // update statisctics
                     const stats = updateStats(amountUSD, fromCurrency);
@@ -59,7 +59,7 @@ convertAmount = (req, res) => {
                                 amount: amount,
                                 symbol: fromCurrency
                             },
-                            stats : stats
+                            stats
                         } 
                         
                     });

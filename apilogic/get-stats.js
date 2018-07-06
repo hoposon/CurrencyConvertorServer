@@ -15,16 +15,10 @@ getStats = (req, res) => {
     // no parameters no input validation
 
     const stats = new Stats(fileName);
-    const maxUsedDestCurrency = stats.getMostUsedDestCurrency();
-    if(maxUsedDestCurrency) {
+    if(stats.data.maxCurrCode) {
         res.header('Access-Control-Allow-Origin', '*').send({
             success: true,
-            data: {
-                totalAmount: stats.data.amount,
-                conversionRequests: stats.data.requests,
-                maxUsedDestCurrency: maxUsedDestCurrency,
-                currenciesUsage: stats.data.currencies
-            }
+            data: stats.data
         })
     } else {
         res.header('Access-Control-Allow-Origin', '*').status(404).send({
