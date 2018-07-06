@@ -1,1 +1,1 @@
-{"amount":45.15122104614523,"currencies":{"CZK":1},"requests":1,"maxCurrCode":"CZK"}
+{"amount":135.4023319088201,"currencies":{"CZK":3},"requests":3,"maxCurrCode":"CZK"}

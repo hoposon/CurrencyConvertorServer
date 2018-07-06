@@ -43,7 +43,7 @@ convertAmount = (req, res) => {
                     amountUSD = amount / response.data.rates[fromCurrency] * response.data.rates["USD"];
 
                     // update statisctics
-                    const stats = updateStats(amountUSD, fromCurrency);
+                    const stats = updateStats(amountUSD, toCurrency);
 
                     // send conversion result
                     res.header('Access-Control-Allow-Origin', '*').send({
