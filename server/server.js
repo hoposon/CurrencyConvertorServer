@@ -23,27 +23,30 @@ app.use(bodyParser.json());
 // ------------------------------------------------------------------------------------
 
 // GET /getCurrencies API - get list of currencies from fixer.io
-app.get('/getCurrencies', (req, res) => {
-    getCurrenciesList(req, res);
-});
+// app.get('/getCurrencies', (req, res) => {
+//     getCurrenciesList(req, res);
+// });
+app.get('/getCurrencies', getCurrenciesList);
 // -------------
 
 // GET /convert API - convert requested amount from/to requested currency
 // this also updates the statistics
-app.get('/convert', validate(validations.convert), (req, res) => {
-    convertAmount(req, res);
-})
+app.get('/convert', validate(validations.convert), convertAmount);
+// app.get('/convert', validate(validations.convert), (req, res) => {
+//     convertAmount(req, res);
+// });
 // -------------
 
 // GET /stats API - gets conversion statistics
-app.get('/stats', (req, res) => {
-    getStats(req, res);
-})
+app.get('/stats', getStats);
+// app.get('/stats', (req, res) => {
+//     getStats(req, res);
+// });
 // -------------
 
 // ------------------------------------------------------------------------------------
 
-
+// error handler
 app.use((err, req, res, next) => {
     if (err instanceof validate.ValidationError) {
       res.status(err.status).json(err);
