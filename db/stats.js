@@ -3,6 +3,9 @@
 // 3rd party libraries
 const fs = require('fs');
 
+// local modules
+const config = require('../config/config'); // main config
+
 class Stats {
     constructor(fileName) {
 
@@ -13,29 +16,53 @@ class Stats {
             requests: 0,
             maxCurrCode: null
         };
-        this.getData();
+
     }
 
     getData() {
-        if(fs.existsSync(this.fileName)) {
-            this.data = JSON.parse(fs.readFileSync(this.fileName).toString());
+        switch(config.statsSource) {
+            case 'file':
+                if(fs.existsSync(this.fileName)) {
+                    this.data = JSON.parse(fs.readFileSync(this.fileName));
+                    return Promise.resolve();
+                } else {
+                    return Promise.reject('Statistics file does not exists. Path: this.fileName');
+                }
+                break;
+            case 'db':
+                // get data from db
+                break;
         }
+        
     }
 
     updateData(amount, destCurrency) {
 
-        // add new data data to existing stats
-        this.data.amount += amount;
-        this.data.currencies[destCurrency] = this.data.currencies[destCurrency] + 1 || 1;
-        this.data.requests++;
-        // exclude max used destination currency
-        // fs.writeFileSync(this.fileName, JSON.stringify({
-        //     amount: this.data.amount,
-        //     currencies: this.date.currencies,
-        //     requests: this.data.requests
-        // }));
-        this.getMostUsedDestCurrency();
-        fs.writeFileSync(this.fileName, JSON.stringify(this.data));
+        this.getData().then(() => {
+            // add new data data to existing stats
+            this.data.amount += amount;
+            this.data.currencies[destCurrency] = this.data.currencies[destCurrency] + 1 || 1;
+            this.data.requests++;
+            this.getMostUsedDestCurrency();
+
+            switch(config.statsSource) {
+                case 'file':
+                    try {
+                        fs.writeFileSync(this.fileName, JSON.stringify(this.data));
+                        return Promise.resolve();
+                    } catch(e) {
+                        return Promise.reject({
+                            message: 'Stats data not loaded',
+                            error: e
+                        });
+                    }
+                    break;
+                case 'db':
+                    // get data from db
+                    break;
+            }
+
+        })
     }
 
     getMostUsedDestCurrency() {
