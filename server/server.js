@@ -6,10 +6,11 @@ const bodyParser = require('body-parser');
 const validate = require('express-validation');
 
 // local modules
-const {getCurrenciesList} = require('../apilogic/get-currencies-list');
-const {convertAmount} = require('../apilogic/convert-amount');
-const {getStats} = require('../apilogic/get-stats');
-const validations = require('../validations/convert'); 
+const {getCurrenciesList} = require('../apilogic/get-currencies-list'); // GET /getCurrencies route callback function
+const {convertAmount} = require('../apilogic/convert-amount'); // GET /convert route callback function
+const {getStats} = require('../apilogic/get-stats'); // GET /stats route callback function
+const validations = require('../validations/convert'); // validations definition
+const resCodes = require('../config/response'); // result codes config
 
 // create express app
 var app = express();
@@ -19,7 +20,7 @@ const port = process.env.PORT || 3000;
 // apply bodyParser to each request
 app.use(bodyParser.json());
 
-// APIS section
+// Routes section
 // ------------------------------------------------------------------------------------
 
 // GET /getCurrencies API - get list of currencies from fixer.io
@@ -47,17 +48,19 @@ app.get('/stats', getStats);
 // ------------------------------------------------------------------------------------
 
 // error handler
+// ------------------------------------------------------------------------------------
 app.use((err, req, res, next) => {
-    if (err instanceof validate.ValidationError) {
-      res.status(err.status).json(err);
-    } else {
-      res.status(500)
+    if (err instanceof validate.ValidationError) { // handles validation specific errors
+      res.header('Access-Control-Allow-Origin', '*').status(err.status).json(err);
+    } else { // handles other errors
+      res.header('Access-Control-Allow-Origin', '*').status(resCodes.error.status)
         .json({
-          status: err.status,
-          message: err.message
+          status: resCodes.error.status,
+          message: resCodes.error.message
         });
     }
   });
+  // ------------------------------------------------------------------------------------
 
 
 // start server on given port

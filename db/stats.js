@@ -27,13 +27,12 @@ class Stats {
                         this.data = JSON.parse(fs.readFileSync(this.fileName));
                         return Promise.resolve();
                     } catch(e) {
-                        return Promise.reject({
-                            message: 'Stats data not loaded',
-                            error: e
-                        });
+                        return Promise.reject(e);
                     }
                 } else {
-                    return Promise.reject('Statistics file does not exists. Path: this.fileName');
+                    return Promise.reject({
+                        message: 'Statistics file does not exists. Path: this.fileName'
+                    });
                 }
                 break;
             case 'db':
@@ -60,7 +59,7 @@ class Stats {
                     } catch(e) {
                         return Promise.reject({
                             message: 'Stats data not updated',
-                            error: e
+                            exception: e
                         });
                     }
                     break;

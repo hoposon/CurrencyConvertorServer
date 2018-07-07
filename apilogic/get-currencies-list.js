@@ -6,9 +6,10 @@ const axios = require('axios'); // http request library
 
 // local modules
 const config = require('../config/config'); // main config
+const resCodes = require('../config/response'); // result codes config
 
 // callback function for /getCurrencies endpoint
-getCurrenciesList = (req, res) => {
+getCurrenciesList = (req, res, next) => {
     
     // no parameters no input validation
 
@@ -17,11 +18,11 @@ getCurrenciesList = (req, res) => {
 
         // handle response from fixer
         // only request status 200 is success
-        if (response.status === 200) {
+        if (response.status === resCodes.success.status) {
             // only response with success true returns data
             if (response.data.success === true) {
                 return res.header('Access-Control-Allow-Origin', '*').json({
-                    success: true,
+                    status: resCodes.success.status,
                     data: response.data.symbols
                 });
             }
@@ -29,16 +30,19 @@ getCurrenciesList = (req, res) => {
         // # log error
 
         // other responses are unssuccesful = do not return requested data
-        throw new Error('Can not get data');
+        throw new Error({
+            message: 'Unable to get currencies list from fixer.io'
+        });
     }).catch((e) => {
         // # log error
-        // # handle better custom errors like ENOTFOUND vs errors from the API
 
         // process errors/unsuccessful requests
-        res.header('Access-Control-Allow-Origin', '*').status(500).json({
-            success: false,
-            error: e.message
-        });
+        next(e);
+        
+        // res.header('Access-Control-Allow-Origin', '*').status(500).json({
+        //     success: false,
+        //     error: e.message
+        // });
     })
 
 }

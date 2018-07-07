@@ -7,6 +7,7 @@ const axios = require('axios'); // http request library
 
 // local modules
 const config = require('../config/config'); // main config
+const resCodes = require('../config/response'); // result codes config
 const {Stats} = require('../db/stats'); // class stats
 
 // variables
@@ -19,7 +20,7 @@ convertAmount = (req, res) => {
     axios.get(config.getRates).then((response) => {
         // handle response from fixer
         // only request status 200 is success
-        if (response.status === 200) {
+        if (response.status === resCodes.success.status) {
             // only response with success true returns data
             if (response.data.success === true) {
                 // validate params 
@@ -53,29 +54,30 @@ convertAmount = (req, res) => {
             }
         }
         // # log error
-        console.log('unsuccesfull response from fixer');
         
         // other responses are unssuccesful = do not return requested data
-        throw new Error('Can not get data');
+        throw new Error({
+            message: 'Unable to get rates from fixer.io'
+        });
     }).then(() => { // resolve update statistics promise
 
             // add stats to return data
             data.stats = stats.data;
             // send conversion result
             return res.header('Access-Control-Allow-Origin', '*').json({
-                success: true,
+                status: resCodes.success.status,
                 data: data
             });
 
     }).catch((e) => {
         // # log error
-        // # handle better custom errors like ENOTFOUND vs errors from the API
-        console.log('catch exception: ', e);
+        
         // process errors/unsuccessful requests
-        return res.header('Access-Control-Allow-Origin', '*').status(500).json({
-            success: false,
-            error: 'Can not get data'
-        });
+        next(e);
+        // return res.header('Access-Control-Allow-Origin', '*').status(500).json({
+        //     success: false,
+        //     error: 'Can not get data'
+        // });
     })
 }
 
