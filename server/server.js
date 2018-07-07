@@ -1,14 +1,15 @@
-
+// main file - expressjs app
 
 // 3rd party libraries
 const express = require('express');
 const bodyParser = require('body-parser');
+const validate = require('express-validation');
 
 // local modules
 const {getCurrenciesList} = require('../apilogic/get-currencies-list');
 const {convertAmount} = require('../apilogic/convert-amount');
 const {getStats} = require('../apilogic/get-stats');
-
+const validations = require('../validations/convert'); 
 
 // create express app
 var app = express();
@@ -29,7 +30,7 @@ app.get('/getCurrencies', (req, res) => {
 
 // GET /convert API - convert requested amount from/to requested currency
 // this also updates the statistics
-app.get('/convert', (req, res) => {
+app.get('/convert', validate(validations.convert), (req, res) => {
     convertAmount(req, res);
 })
 // -------------
@@ -41,6 +42,19 @@ app.get('/stats', (req, res) => {
 // -------------
 
 // ------------------------------------------------------------------------------------
+
+
+app.use((err, req, res, next) => {
+    if (err instanceof validate.ValidationError) {
+      res.status(err.status).json(err);
+    } else {
+      res.status(500)
+        .json({
+          status: err.status,
+          message: err.message
+        });
+    }
+  });
 
 
 // start server on given port

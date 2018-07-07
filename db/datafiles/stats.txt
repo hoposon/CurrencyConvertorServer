@@ -1,1 +1,0 @@
-{"amount":80.98686326476212,"currencies":{"NOK":1,"USD":5,"ARS":1,"BHD":1},"requests":8,"maxCurrCode":"USD"}

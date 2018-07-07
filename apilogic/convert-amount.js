@@ -24,9 +24,7 @@ convertAmount = (req, res) => {
         if (response.status === 200) {
             // only response with success true returns data
             if (response.data.success === true) {
-
                 // validate params 
-                // #validate it exists in returned rates
                 let amount = req.query.amount;
                 let fromCurrency = req.query.from;
                 let toCurrency = req.query.to;

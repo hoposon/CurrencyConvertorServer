@@ -1,4 +1,11 @@
+// class for loading statistics
+
+// 3rd party libraries
 const fs = require('fs');
+
+// local modules
+const config = require('../config/config'); // main config
+
 
 class Stats {
     constructor(fileName) {
