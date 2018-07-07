@@ -20,11 +20,10 @@ getCurrenciesList = (req, res) => {
         if (response.status === 200) {
             // only response with success true returns data
             if (response.data.success === true) {
-                res.header('Access-Control-Allow-Origin', '*').send({
+                return res.header('Access-Control-Allow-Origin', '*').json({
                     success: true,
                     data: response.data.symbols
                 });
-                return;
             }
         }
         // # log error
@@ -36,7 +35,7 @@ getCurrenciesList = (req, res) => {
         // # handle better custom errors like ENOTFOUND vs errors from the API
 
         // process errors/unsuccessful requests
-        res.header('Access-Control-Allow-Origin', '*').status(500).send({
+        res.header('Access-Control-Allow-Origin', '*').status(500).json({
             success: false,
             error: e.message
         });

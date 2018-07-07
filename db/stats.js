@@ -23,8 +23,15 @@ class Stats {
         switch(config.statsSource) {
             case 'file':
                 if(fs.existsSync(this.fileName)) {
-                    this.data = JSON.parse(fs.readFileSync(this.fileName));
-                    return Promise.resolve();
+                    try {
+                        this.data = JSON.parse(fs.readFileSync(this.fileName));
+                        return Promise.resolve();
+                    } catch(e) {
+                        return Promise.reject({
+                            message: 'Stats data not loaded',
+                            error: e
+                        });
+                    }
                 } else {
                     return Promise.reject('Statistics file does not exists. Path: this.fileName');
                 }
@@ -52,7 +59,7 @@ class Stats {
                         return Promise.resolve();
                     } catch(e) {
                         return Promise.reject({
-                            message: 'Stats data not loaded',
+                            message: 'Stats data not updated',
                             error: e
                         });
                     }

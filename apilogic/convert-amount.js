@@ -72,7 +72,7 @@ convertAmount = (req, res) => {
         // # handle better custom errors like ENOTFOUND vs errors from the API
         console.log('catch exception: ', e);
         // process errors/unsuccessful requests
-        res.header('Access-Control-Allow-Origin', '*').status(500).json({
+        return res.header('Access-Control-Allow-Origin', '*').status(500).json({
             success: false,
             error: 'Can not get data'
         });
