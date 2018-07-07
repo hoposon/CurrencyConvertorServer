@@ -1,0 +1,1 @@
+{"amount":44.928662481563116,"currencies":{"GBP":1},"requests":1,"maxCurrCode":"GBP"}

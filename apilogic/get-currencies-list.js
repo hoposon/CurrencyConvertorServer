@@ -5,14 +5,7 @@
 const axios = require('axios'); // http request library
 
 // local modules
-const config = require('../config/config');
-
-// // fixer API components- returns list of currencies
-// const API_URL = 'http://data.fixer.io/api/symbols'; // API URL
-// const API_KEY = 'access_key=6dc55fc14ad2e142f61f9d1032c6eb45'; // api access key
-
-// // complete URL
-// const apiUrl = `${API_URL}?${API_KEY}`;
+const config = require('../config/config'); // main config
 
 // callback function for /getCurrencies endpoint
 getCurrenciesList = (req, res) => {

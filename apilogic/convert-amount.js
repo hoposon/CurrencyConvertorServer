@@ -6,19 +6,21 @@
 const axios = require('axios'); // http request library
 
 // local modules
+const config = require('../config/config'); // main config
+const {Stats} = require('../db/stats'); // class stats
 const {updateStats} = require('./update-stats'); // updates statistics
 
-// fixer API components- returns list of rates
-const API_URL = 'http://data.fixer.io/api/latest'; // API URL
-const API_KEY = 'access_key=6dc55fc14ad2e142f61f9d1032c6eb45'; // api access key
+// // fixer API components- returns list of rates
+// const API_URL = 'http://data.fixer.io/api/latest'; // API URL
+// const API_KEY = 'access_key=6dc55fc14ad2e142f61f9d1032c6eb45'; // api access key
 
-// complete URL
-const apiUrl = `${API_URL}?${API_KEY}`;
+// // complete URL
+// const apiUrl = `${API_URL}?${API_KEY}`;
 
 // callback function for /convert endpoint
 convertAmount = (req, res) => {
 
-    axios.get(apiUrl).then((response) => {
+    axios.get(config.getRates).then((response) => {
         // handle response from fixer
         // only request status 200 is success
         if (response.status === 200) {
