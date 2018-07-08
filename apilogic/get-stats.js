@@ -21,14 +21,8 @@ getStats = (req, res, next) => {
             data: stats.data
         })
     }).catch((e) => {
-        // # log error
-
         // process errors/unsuccessful requests
         next(e);
-        // return res.header('Access-Control-Allow-Origin', '*').status(404).json({
-        //     success: false,
-        //     error: 'Data not available'
-        // })
     })
 }
 

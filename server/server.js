@@ -11,6 +11,7 @@ const {convertAmount} = require('../apilogic/convert-amount'); // GET /convert r
 const {getStats} = require('../apilogic/get-stats'); // GET /stats route callback function
 const validations = require('../validations/convert'); // validations definition
 const resCodes = require('../config/response'); // result codes config
+const logger = require('../logging/logger'); // logger
 
 // create express app
 var app = express();
@@ -24,25 +25,16 @@ app.use(bodyParser.json());
 // ------------------------------------------------------------------------------------
 
 // GET /getCurrencies API - get list of currencies from fixer.io
-// app.get('/getCurrencies', (req, res) => {
-//     getCurrenciesList(req, res);
-// });
 app.get('/getCurrencies', getCurrenciesList);
 // -------------
 
 // GET /convert API - convert requested amount from/to requested currency
 // this also updates the statistics
 app.get('/convert', validate(validations.convert), convertAmount);
-// app.get('/convert', validate(validations.convert), (req, res) => {
-//     convertAmount(req, res);
-// });
 // -------------
 
 // GET /stats API - gets conversion statistics
 app.get('/stats', getStats);
-// app.get('/stats', (req, res) => {
-//     getStats(req, res);
-// });
 // -------------
 
 // ------------------------------------------------------------------------------------
@@ -51,12 +43,14 @@ app.get('/stats', getStats);
 // ------------------------------------------------------------------------------------
 app.use((err, req, res, next) => {
     if (err instanceof validate.ValidationError) { // handles validation specific errors
-      res.header('Access-Control-Allow-Origin', '*').status(err.status).json(err);
+        res.header('Access-Control-Allow-Origin', '*').status(err.status).json(err);
     } else { // handles other errors
-      res.header('Access-Control-Allow-Origin', '*').status(resCodes.error.status)
-        .json({
-          status: resCodes.error.status,
-          message: resCodes.error.message
+        // log detailed error to file
+        logger.error(err);
+        // send error response
+        res.header('Access-Control-Allow-Origin', '*').status(resCodes.error.status).json({
+            status: resCodes.error.status,
+            message: resCodes.error.message
         });
     }
   });

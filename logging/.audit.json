@@ -1,0 +1,34 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 5
+    },
+    "auditLog": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/.audit.json",
+    "files": [
+        {
+            "date": 1531072224593,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-50.log",
+            "hash": "64d4ab4ff4af9c1c74a23629fcd6138d"
+        },
+        {
+            "date": 1531072245731,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-50.log",
+            "hash": "ab7d4cb69f187195e5671c1e5973a9a0"
+        },
+        {
+            "date": 1531072275909,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-51.log",
+            "hash": "5ea59c40d497635e49e7b35a1b0ac85e"
+        },
+        {
+            "date": 1531072306885,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-51.log",
+            "hash": "e29131133bcb6c46f34780ae5b69168c"
+        },
+        {
+            "date": 1531072330914,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-52.log",
+            "hash": "b75b56f7a1b96662ed9764b1ad37f26a"
+        }
+    ]
+}

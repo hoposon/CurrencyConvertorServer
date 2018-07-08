@@ -24,6 +24,7 @@ config.getRates = `${API_URL_RATES}?${API_KEY}`;
 // --------------------
 // Validations
 // --------------------
+
 // currencies validation db file path
 config.currValDbPath = path.join(__dirname, '../db/datafiles/currencies.json');
 
@@ -38,6 +39,14 @@ config.statsCurrency = 'USD';
 
 // statistics db file path
 config.statsFileName = path.join(__dirname,'../db/datafiles/stats.json');
+
+// --------------------
+// Logs
+// --------------------
+
+// logging level
+config.logFilePath = path.join(__dirname,'../logging/log.json');
+config.logLevel = 'error'; // #add level based on environment
 
 
 module.exports = config;

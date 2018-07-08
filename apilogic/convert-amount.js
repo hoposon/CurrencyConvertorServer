@@ -53,12 +53,12 @@ convertAmount = (req, res) => {
                 return stats.updateData(amountUSD, toCurrency);
             }
         }
-        // # log error
-        
+
         // other responses are unssuccesful = do not return requested data
         throw new Error({
             message: 'Unable to get rates from fixer.io'
         });
+        
     }).then(() => { // resolve update statistics promise
 
             // add stats to return data
@@ -70,14 +70,8 @@ convertAmount = (req, res) => {
             });
 
     }).catch((e) => {
-        // # log error
-        
         // process errors/unsuccessful requests
         next(e);
-        // return res.header('Access-Control-Allow-Origin', '*').status(500).json({
-        //     success: false,
-        //     error: 'Can not get data'
-        // });
     })
 }
 

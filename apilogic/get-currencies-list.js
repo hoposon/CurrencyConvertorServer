@@ -27,22 +27,15 @@ getCurrenciesList = (req, res, next) => {
                 });
             }
         }
-        // # log error
 
         // other responses are unssuccesful = do not return requested data
         throw new Error({
             message: 'Unable to get currencies list from fixer.io'
         });
+        
     }).catch((e) => {
-        // # log error
-
         // process errors/unsuccessful requests
         next(e);
-        
-        // res.header('Access-Control-Allow-Origin', '*').status(500).json({
-        //     success: false,
-        //     error: e.message
-        // });
     })
 
 }
