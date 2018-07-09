@@ -8,11 +8,9 @@ const axios = require('axios'); // http request library
 const config = require('../config/config'); // main config
 const resCodes = require('../config/response'); // result codes config
 
-// callback function for /getCurrencies endpoint
+// callback function for GET /getCurrencies endpoint
 getCurrenciesList = (req, res, next) => {
     
-    // no parameters no input validation
-
     // call fixer API to get list of currencies
     axios.get(config.getlistURL).then((response) => {
 
@@ -21,6 +19,7 @@ getCurrenciesList = (req, res, next) => {
         if (response.status === resCodes.success.status) {
             // only response with success true returns data
             if (response.data.success === true) {
+                // response back with status 200 and data
                 return res.header('Access-Control-Allow-Origin', '*').json({
                     status: resCodes.success.status,
                     data: response.data.symbols

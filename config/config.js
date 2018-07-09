@@ -5,6 +5,13 @@ const config = {};
 const path = require('path');
 
 // --------------------
+// server configuration
+// --------------------
+
+// port
+config.port = 3000;
+
+// --------------------
 // fixer.io APIs URLs
 // --------------------
 

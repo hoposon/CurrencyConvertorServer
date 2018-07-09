@@ -1,3 +1,5 @@
+// response statuses and messages config
+
 const response = {
     success: {
         status: 200
