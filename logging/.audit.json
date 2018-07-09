@@ -6,29 +6,29 @@
     "auditLog": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/.audit.json",
     "files": [
         {
-            "date": 1531072224593,
-            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-50.log",
-            "hash": "64d4ab4ff4af9c1c74a23629fcd6138d"
+            "date": 1531089802941,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-09-00-43.log",
+            "hash": "090bd67e72d87cfc3ca201204f026e20"
         },
         {
-            "date": 1531072245731,
-            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-50.log",
-            "hash": "ab7d4cb69f187195e5671c1e5973a9a0"
+            "date": 1531089839640,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-09-00-43.log",
+            "hash": "b115e9701d1c9d3df3d0830978c44144"
         },
         {
-            "date": 1531072275909,
-            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-51.log",
-            "hash": "5ea59c40d497635e49e7b35a1b0ac85e"
+            "date": 1531089844470,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-09-00-44.log",
+            "hash": "46d3bbec4f8b2d6cc737ab59a07aa384"
         },
         {
-            "date": 1531072306885,
-            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-51.log",
-            "hash": "e29131133bcb6c46f34780ae5b69168c"
+            "date": 1531089943162,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-09-00-45.log",
+            "hash": "b95a8413d6eb09dba5e1de2ec58dbe71"
         },
         {
-            "date": 1531072330914,
-            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-08-19-52.log",
-            "hash": "b75b56f7a1b96662ed9764b1ad37f26a"
+            "date": 1531089990313,
+            "name": "/home/lukas/Data-c/Operations/Projekty/CurrencyConvertor/server/logging/log.json-2018-07-09-00-46.log",
+            "hash": "4880cfccc1dd2f85b83752cb4b838ca2"
         }
     ]
 }

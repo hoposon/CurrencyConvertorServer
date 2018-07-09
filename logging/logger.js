@@ -15,7 +15,7 @@ const logger = winston.createLogger({
         new DailyRotateFile({
             filename: `${config.logFilePath}-%DATE%.log`,
             datePattern: 'YYYY-MM-DD-HH-mm',
-            zippedArchive: true,
+            zippedArchive: false,
             maxSize: '20m',
             maxFiles: '5'
         }) // combined log file
